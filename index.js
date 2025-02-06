@@ -18,7 +18,7 @@ connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net"
 const testvidios = connectDB.validation('testvidios', {
     url: { type: String, required: true },
     filename: { type: String, required: true },
-    deviceName: { type: String, required: false },
+    divisename: { type: String, required: false },
     date: { type: String, required: false },
     fromtime: { type: String, required: false },
     totime: { type: String, required: false },
