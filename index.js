@@ -12,7 +12,7 @@ app.use(morgan("dev"));
 app.use(cors());
 
 // Connect to MongoDB
-connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net/vmarg");
+connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net/project-Vmarg");
 
 // Define Schema
 const testvidios = connectDB.validation('testvidios', {
