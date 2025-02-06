@@ -12,7 +12,7 @@ app.use(morgan("dev"));
 app.use(cors());
 
 // Connect to MongoDB
-connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net");
+connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net/dmarg");
 
 // Define Schema
 const testvidios = connectDB.validation('testvidios', {
@@ -33,23 +33,23 @@ const getlocation =connectDB.validation("divicelatandlongitude",{
       required: true
     },
     latitude: {
-      type: Number,
+      type: String,
       required: true
     },
     longitude: {
-      type: Number,
+      type: String,
       required: true
     },
     date: {
-      type: Date,
+      type: String,
       required: true
     },
     fromTime: {
-      type: Date,
+      type: String,
       required: true
     },
     toTime: {
-      type: Date,
+      type: String,
       required: true
     }
   })
