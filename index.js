@@ -91,13 +91,13 @@ const getlocation =connectDB.validation("divicelatandlongitude",{
 // **POST /create**
 app.post("/create", async (req, res) => {
     try {
-        const { url, filename, divisename, date, fromtime, totime } = req.body;
+        const { url, filename, deviceName, date, fromtime, totime } = req.body;
 
         if (!url || !filename) {
             return res.status(400).json({ message: "url and filename are required" });
         }
 
-        const newRecord = await testvidios.create({ url, filename, divisename, date, fromtime, totime });
+        const newRecord = await testvidios.create({ url, filename, deviceName, date, fromtime, totime });
         res.status(201).json({ message: "Record added successfully", data: newRecord });
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -107,7 +107,7 @@ app.post("/create", async (req, res) => {
 // **GET /find**
 app.get("/find", async (req, res) => {
     try {
-        const { fromdate, todate, fromtime, totime, divisename } = req.query;
+        const { fromdate, todate, fromtime, totime, deviceName  } = req.query;
 
         if (!fromdate || !todate) {
             return res.status(400).json({ message: "Both fromdate and todate are required" });
@@ -117,8 +117,8 @@ app.get("/find", async (req, res) => {
         if (fromtime && totime) {
             query.$and = [{ fromtime: { $gte: fromtime } }, { totime: { $lte: totime } }];
         }
-        if (divisename) {
-            query.divisename = divisename;
+        if (deviceName) {
+            query.deviceName = deviceName;
         }
 
         const result = await testvidios.find(query);
@@ -135,14 +135,14 @@ app.get("/find", async (req, res) => {
 // **GET /check-live**
 app.get('/check-live', async (req, res) => {
     try {
-        const { fromdate, todate, fromtime, totime, divisename } = req.query;
+        const { fromdate, todate, fromtime, totime, deviceName } = req.query;
 
         const query = { date: { $gte: fromdate, $lte: todate } };
         if (fromtime && totime) {
             query.$and = [{ fromtime: { $gte: fromtime } }, { totime: { $lte: totime } }];
         }
-        if (divisename) {
-            query.divisename = divisename;
+        if (deviceName) {
+            query.deviceName = deviceName;
         }
 
         const result = await testvidios.find(query);
