@@ -21,8 +21,73 @@ const testvidios = connectDB.validation('testvidios', {
     divisename: { type: String, required: false },
     date: { type: String, required: false },
     fromtime: { type: String, required: false },
-    totime: { type: String, required: false }
+    totime: { type: String, required: false },
+    
 }, { timestamps: false });
+
+
+
+const getlocation =connectDB.validation("divicelatandlongitude",{
+    deviceName: {
+      type: String,
+      required: true
+    },
+    latitude: {
+      type: Number,
+      required: true
+    },
+    longitude: {
+      type: Number,
+      required: true
+    },
+    date: {
+      type: Date,
+      required: true
+    },
+    fromTime: {
+      type: Date,
+      required: true
+    },
+    toTime: {
+      type: Date,
+      required: true
+    }
+  })
+
+
+  app.post('/getlocation', async (req, res) => {
+    try {
+      const { deviceName, latitude, longitude, date, fromTime, toTime } = req.body;
+  
+      // Validate data (you can also use a schema validation in Mongoose for this)
+      if (!deviceName || !latitude || !longitude || !date || !fromTime || !toTime) {
+        return res.status(400).json({ error: 'All fields are required' });
+      }
+  
+      // Create a new location record
+      const newLocation = new getlocation({
+        deviceName,
+        latitude,
+        longitude,
+        date,
+        fromTime,
+        toTime
+      });
+  
+      // Save the record to the database
+      await newLocation.save();
+  
+      // Respond with success message and the saved data
+      res.status(201).json({
+        message: 'Location record created successfully',
+        data: newLocation
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error while creating the location' });
+    }
+  });
+  
 // **POST /create**
 app.post("/create", async (req, res) => {
     try {
