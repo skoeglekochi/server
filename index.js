@@ -18,13 +18,10 @@ connectDB("mongodb+srv://proectnova:qIPaIQWO0z9BjGgB@cluster0.eu4py.mongodb.net"
 const testvidios = connectDB.validation('testvidios', {
     url: { type: String, required: true },
     filename: { type: String, required: true },
-    devicename: { type: String, required: false },
+    divisename: { type: String, required: false },
     date: { type: String, required: false },
     fromtime: { type: String, required: false },
-    totime: { type: String, required: false },
-    latitude:{type:String,required:true},
-    longitude:{type:String,required:true}
-    
+    totime: { type: String, required: false }
 }, { timestamps: false });
 // **POST /create**
 app.post("/create", async (req, res) => {
@@ -65,6 +62,10 @@ app.get("/find", async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+
+
+
 
 // **GET /check-live**
 app.get('/check-live', async (req, res) => {
