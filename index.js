@@ -54,6 +54,7 @@ const getlocation =connectDB.validation("divicelatandlongitude",{
     }
   })
 
+  
 
   app.post('/getlocation', async (req, res) => {
     try {
